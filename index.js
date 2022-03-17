@@ -13,6 +13,7 @@ app.use(cors())
 //ler json
 app.use (express.urlencoded({extended: true,}))
 app.use(express.json())
+app.use(express.static('pages'))
 
 //rotas externas 
 const personRoute = require('./routes/personRoutes.js')
@@ -23,14 +24,19 @@ app.use('/person',personRoute)
 
 
 //rotas endpoint
-app.get('/', (req, res) =>{  
+app.get('/index', (req, res) =>{  
     res.sendFile(path.join(__dirname, './pages/getPerson.html'))
+})
+
+app.get('/', (req, res) =>{  
+    res.json({message: "erradooo"})
 })
 
 
 
 const DB_USER= process.env.DB_USER
 const DB_PASSWORD= encodeURIComponent(process.env.DB_PASSWORD)
+const PORT = process.env.PORT || 3000
 
 //db e listen 5IHvoyVoHJJaMmmN
 mongoose.connect(
@@ -38,8 +44,8 @@ mongoose.connect(
 .then(()=>{
     //listen
     console.log('connect mongoDB')
-    app.listen(3000, ()=>{
-    console.log('listen on port 3000')
+    app.listen(PORT, ()=>{
+    console.log('listen on port: ' + PORT)
 })
 })
 .catch((err) => {console.log(err)})
