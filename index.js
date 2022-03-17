@@ -24,13 +24,7 @@ app.use('/person',personRoute)
 
 
 //rotas endpoint
-app.get('/index', (req, res) =>{  
-    res.sendFile(path.join(__dirname, './pages/getPerson.html'))
-})
 
-app.get('/', (req, res) =>{  
-    res.json({message: "erradooo"})
-})
 
 
 
