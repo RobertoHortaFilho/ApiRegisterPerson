@@ -4,6 +4,7 @@ const app = express();
 var cors = require('cors')
 const mongoose = require('mongoose')
 require('dotenv').config()
+const path = require('path')
 
 const Person = require('./models/Person')
 
@@ -23,7 +24,7 @@ app.use('/person',personRoute)
 
 //rotas endpoint
 app.get('/', (req, res) =>{  
-    res.json({message: 'oi express :)'})
+    res.sendFile(path.join(__dirname, './pages/getPerson.html'))
 })
 
 
