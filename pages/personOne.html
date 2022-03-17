@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            font-size :15px;
+            margin: 5px;
+            padding: 5pxpx;
+            background-color: #dadada
+
+        }
+        .container{
+            margin:10px;
+            padding: 15px;
+            background-color: #aeaeae;
+
+        }
+        h1, p{
+            display:inline-block;
+            background-color: #aeaeae;
+        }
+    </style>
+</head>
+<body>
+    <a href="getPerson.html"><button >voltar</button></a>
+    
+    <div class="container">
+        <h1>Nome: </h1>
+        <p id="name">name</p>
+    </div>
+    
+    <div class="container">
+        <h1>Salário: </h1>
+        <p id="salary">salary</p>
+    </div>
+
+    <div class="container">
+        <h1>Aprovado: </h1>
+        <p id="approved"> approved</p>
+    </div>
+
+    <div class="container">
+        <h1>Id: </h1>
+        <p id="id"> id</p>
+    </div>
+
+    <script>
+
+        const queryString = window.location.search
+        const urlParams = new URLSearchParams(queryString)
+        const id = urlParams.get('idd')
+        console.log(id)
+
+        document.body.onload = ()=>{
+            const url = 'http://localhost:3000/person'
+            const stringJson = doGet(url);
+            const people = JSON.parse(stringJson)
+            let person = undefined;
+            for(let i = 0; i<people.length; i++){
+                if(people[i]['_id'] === id ){ 
+                    person = people[i];   
+                }
+            }
+            if (person == undefined){
+                return;
+                //depois arrumar
+            }
+            const name = document.getElementById('name')
+            const salary = document.getElementById('salary')
+            const approved = document.getElementById('approved')
+            const idHtml = document.getElementById('id')
+            name.innerHTML = person.name;
+            salary.innerHTML = person.salary;
+            approved.innerHTML = person.approved;
+            idHtml.innerHTML = person._id;
+        }
+
+        function doGet(url){
+            const request = new XMLHttpRequest()
+            request.open('GET', url, false)
+            request.send()
+
+        
+            return request.responseText;
+
+        }
+    </script>
+</body>
+</html>

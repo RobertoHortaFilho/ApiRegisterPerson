@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cadastrar</title>
+    <style>
+        *{
+            padding: 5px;
+            margin:5px;
+            background-color: #d6d6d6;
+            font-size: 15px;
+            border-radius:3px;
+
+        }
+
+        .container{
+            background-color:#b0b0b0;
+            border-radius:5px;
+
+        }
+        
+    </style>
+    
+</head>
+<body>
+    <a href="getPerson.html"><button> voltar </button></a>
+    <div class="container">
+        <p>criar person</p>
+        <form onsubmit="cadastrarUsuario()">
+            <label class="laybel" for="name">nome    :</label>
+            <input type="text" id="name" name="name" placeholder="digite o seu nome">
+            <br>
+            <label class="laybel" for="salario">salário:</label>
+            <input type="number" id="salary" name="salary" placeholder="1000">
+            <br>
+            <label class="laybel" for="aprovado">aprovado:</label>
+            <input type="text" id="approved" name="approved" placeholder="s/n">
+            <br>
+            <button type="submit">Enviar</button>
+        
+        </form>
+    </div>
+
+    <script defer>
+        function doPOST(url, body){
+        let request = new XMLHttpRequest()
+        request.open("POST",url,true)
+        request.setRequestHeader("Content-Type", "application/json")
+        request.send(JSON.stringify( body ))
+
+        request.onload = function (){
+            console.log(this.responseText)
+        }
+
+        return request.responseText
+    }
+    function cadastrarUsuario(){
+        event.preventDefault();
+        const url = "http://localhost:3000/person";
+
+        const name = document.getElementById('name').value
+        const salaryStr = document.getElementById('salary').value
+        const approvedres = document.getElementById('approved').value
+        let approved
+        if (approvedres == 's'){
+            approved = true;
+        }else{
+            approved = false;
+        }
+        
+        if(name == '' || salaryStr == ''){
+            console.log('coloca os negocio direito porra')
+            return
+        }
+        const salary = parseFloat(salaryStr)
+        const body = {name,salary,approved}
+        console.log(doPOST(url,body))
+
+        setTimeout(()=>{
+            window.location.href = 'cadastrar.html'
+        },1000)
+        
+        
+        };
+
+    </script>
+    
+</body>
+</html>

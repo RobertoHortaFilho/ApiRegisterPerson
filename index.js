@@ -1,11 +1,14 @@
 //configs imports
 const express = require('express');
 const app = express();
+var cors = require('cors')
 const mongoose = require('mongoose')
 require('dotenv').config()
 
 const Person = require('./models/Person')
 
+//cors
+app.use(cors())
 //ler json
 app.use (express.urlencoded({extended: true,}))
 app.use(express.json())

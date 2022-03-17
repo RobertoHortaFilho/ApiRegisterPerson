@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users</title>
+    <style>
+        * {
+            margin:0.5em;
+            padding:0px;
+            font-size:1em;
+        }
+        body{
+            background-color: #dadada;
+            padding: 1em;
+
+        }
+        h1{
+            margin-left: 2em;
+        }
+        button{
+            border-radius: 5px;
+            padding:5px;
+            margin-top:0px;
+            margin-bottom: 20px;
+        }
+        #people{
+            display:flex;
+            width:95vw;
+            flex-wrap: wrap;
+        }
+        .container{
+            background-color: #8b8b8b;
+            padding:5px;
+            margin:5px;
+            border-radius:5px;
+        }
+    </style>
+</head>
+<body>
+    <button type="submit" onclick="getPersons()"> recarregar </button>
+    <a href="cadastrar.html"><button type="submit"> adicionar </button></a>
+    
+    <h1>people</h1>
+    <div id="people">
+
+    </div>
+
+    <script>
+        document.body.onload = doGet('http://localhost:3000/person');
+        function getPersons(){
+            event.preventDefault();
+            const url = 'http://localhost:3000/person'
+            doGet(url)
+        }
+
+        function doGet(url){
+            const request = new XMLHttpRequest()
+            request.open('GET', url, false)
+            request.send()
+
+        
+            displayInScreen(request.responseText)
+
+        }
+
+        function displayInScreen(valores){
+            const values = JSON.parse(valores)
+            const people = document.getElementById('people')
+            people.innerHTML = ''
+            console.log(values)
+            for (let i = 0; i < values.length; i++){
+                let container = createPersonLaybel(values[i])
+                people.appendChild(container)
+            }
+            
+
+        }
+        
+        function createPersonLaybel(value){
+            const container = document.createElement('div')
+            container.classList.add('container')
+            const nameLaybel = document.createElement('p')
+            nameLaybel.classList.add('data')
+            nameLaybel.innerHTML = `nome : ${(value.name).toString()}`
+            const salaryLaybel = document.createElement('p')
+            salaryLaybel.classList.add('data')
+            salaryLaybel.innerHTML = `salario : ${(value.salary).toString()}`
+            const approvedLaybel = document.createElement('p')
+            approvedLaybel.classList.add('data')
+            approvedLaybel.innerHTML= `aprovado : ${(value.approved).toString()}`
+            const buttonLaybel = document.createElement('button')
+            buttonLaybel.innerHTML = 'remover'
+            buttonLaybel.onclick = () =>{
+                const idd = value._id
+                deletePerson(idd)
+                getPersons()
+
+            }
+            const buttonLaybel2 = document.createElement('button')
+            buttonLaybel2.innerHTML = 'expandir'
+            buttonLaybel2.onclick = () =>{
+                window.location.href = `personOne.html?idd=${value._id}`
+            }
+            
+            container.appendChild(nameLaybel)
+            container.appendChild(salaryLaybel)
+            container.appendChild(approvedLaybel)
+            container.appendChild(buttonLaybel)
+            container.appendChild(buttonLaybel2)
+            
+            return container
+        }
+
+
+        function deletePerson(idd){
+            event.preventDefault()
+            const url = 'http://localhost:3000/person/'
+            console.log(doDelete(`${url}${idd}`))
+        }
+
+         function doDelete(url){
+            const body = {idd_ : 3}
+            const request = new XMLHttpRequest();
+            request.open('DELETE', url, false);
+            request.send()
+
+            request.onload = function() {
+                console.log(this.responseText);
+            }
+            return request.responseText;
+        }
+    </script>
+</body>
+</html>

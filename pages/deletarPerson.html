@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete</title>
+</head>
+<body>
+
+    <p>deletar usuarios</p>
+
+    <form onsubmit="deletePerson()">
+        <label for="id">id:</label>
+        <input type="text" placeholder="id" id="idd">
+        <br>
+        <button type="submit">enviar</button>
+    </form>
+    
+
+    <script>
+
+        function deletePerson(){
+            event.preventDefault()
+            const url = 'http://localhost:3000/person/'
+            const idd = document.getElementById('idd').value
+
+            if (idd == ''){
+                console.log('id invalido')
+                return;
+            }
+            console.log(doDelete(`${url}${idd}`))
+        }
+
+         function doDelete(url){
+            const body = {idd_ : 3}
+            const request = new XMLHttpRequest();
+            request.open('DELETE', url, false);
+            request.send()
+
+            request.onload = function() {
+                console.log(this.responseText);
+            }
+            return request.responseText;
+        }
+    </script>
+</body>
+</html>
