@@ -1,6 +1,4 @@
 const routes = require('express').Router();
-const { Router } = require('express');
-const { response } = require('express');
 const Person = require('../models/Person.js')
 
 //rotas API

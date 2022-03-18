@@ -25,6 +25,13 @@ app.use('/person',personRoute)
 
 //rotas endpoint
 
+app.get('/ola',(req,res)=>{
+    res.json({mensage:"deu certinho"})
+})
+
+app.get('/',(req,res)=>{
+    res.json({mensage:"home"})
+})
 
 
 
