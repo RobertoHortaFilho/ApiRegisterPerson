@@ -16,10 +16,10 @@ app.use(express.json())
 app.use(express.static('pages'))
 
 //rotas externas 
-const personRoute = require('./routes/personRoutes.js')
+//const personRoute = require('./routes/personRoutes.js')
 
 
-app.use('/person',personRoute)
+//app.use('/person',personRoute)
 
 
 
