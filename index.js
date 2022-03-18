@@ -33,6 +33,9 @@ app.get('/',(req,res)=>{
     res.json({mensage:"home"})
 })
 
+app.get('/nova', (req,res) =>{
+    res.json({message:"nova rota"})
+})
 
 
 const DB_USER= process.env.DB_USER
