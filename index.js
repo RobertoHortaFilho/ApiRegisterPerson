@@ -27,6 +27,9 @@ app.use('/person',personRoute)
 app.get('/',(req,res)=>{
     res.sendFile(path.join(__dirname, 'pages/getPerson.html'))
 })
+app.get('/getPerson',(req,res)=>{
+    res.sendFile(path.join(__dirname, 'pages/getPerson.html'))
+})
 
 app.get('/cadastrar',(req,res)=>{
     res.sendFile(path.join(__dirname, 'pages/cadastrar.html'))
