@@ -56,7 +56,7 @@
         console.log(id)
 
         document.body.onload = ()=>{
-            const url = 'http://localhost:3000/person'
+            const url = `${window.location.origin}/person`
             const stringJson = doGet(url);
             const people = JSON.parse(stringJson)
             let person = undefined;

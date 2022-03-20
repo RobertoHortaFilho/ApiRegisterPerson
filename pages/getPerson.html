@@ -48,10 +48,10 @@
     </div>
 
     <script>
-        document.body.onload = doGet('http://localhost:3000/person');
+        document.body.onload = doGet(`${window.location.origin}/person`);
         function getPersons(){
             event.preventDefault();
-            const url = 'http://localhost:3000/person'
+            const url = `${window.location.origin}/person`
             doGet(url)
         }
 
@@ -116,7 +116,7 @@
 
         function deletePerson(idd){
             event.preventDefault()
-            const url = 'http://localhost:3000/person/'
+            const url = `${window.location.origin}/person`
             console.log(doDelete(`${url}${idd}`))
         }
 

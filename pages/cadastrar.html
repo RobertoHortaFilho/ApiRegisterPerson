@@ -58,7 +58,7 @@
     }
     function cadastrarUsuario(){
         event.preventDefault();
-        const url = "http://localhost:3000/person";
+        const url = `${window.location.origin}/person`;
 
         const name = document.getElementById('name').value
         const salaryStr = document.getElementById('salary').value
@@ -71,7 +71,7 @@
         }
         
         if(name == '' || salaryStr == ''){
-            console.log('coloca os negocio direito porra')
+            console.log('Dados faltando')
             return
         }
         const salary = parseFloat(salaryStr)
