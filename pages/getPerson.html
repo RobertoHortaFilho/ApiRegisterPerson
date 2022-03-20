@@ -40,7 +40,7 @@
 </head>
 <body>
     <button type="submit" onclick="getPersons()"> recarregar </button>
-    <a href="cadastrar.html"><button type="submit"> adicionar </button></a>
+    <a href="cadastrar"><button type="submit"> adicionar </button></a>
     
     <h1>people</h1>
     <div id="people">
@@ -101,7 +101,7 @@
             const buttonLaybel2 = document.createElement('button')
             buttonLaybel2.innerHTML = 'expandir'
             buttonLaybel2.onclick = () =>{
-                window.location.href = `personOne.html?idd=${value._id}`
+                window.location.href = `personOne?idd=${value._id}`
             }
             
             container.appendChild(nameLaybel)

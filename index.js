@@ -23,17 +23,24 @@ app.use('/person',personRoute)
 
 //rotas endpoint
 
-app.get('/ola',(req,res)=>{
-    res.json({mensage:"deu certinho"})
-})
 
 app.get('/',(req,res)=>{
     res.sendFile(path.join(__dirname, 'pages/getPerson.html'))
 })
 
-app.get('/nova', (req,res) =>{
-    res.json({message:"nova rota"})
+app.get('/cadastrar',(req,res)=>{
+    res.sendFile(path.join(__dirname, 'pages/cadastrar.html'))
 })
+
+app.get('/personOne',(req,res)=>{
+    res.sendFile(path.join(__dirname, 'pages/personOne.html'))
+})
+
+app.get('/deletarPerson',(req,res)=>{
+    res.sendFile(path.join(__dirname, 'pages/deletarPerson.html'))
+})
+
+
 
 
 const DB_USER= process.env.DB_USER
